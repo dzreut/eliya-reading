@@ -1,0 +1,664 @@
+<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ההרפתקה של אליה</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2f5fd0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="ההרפתקה של אליה">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@500;600;700;800&display=swap">
+<style>
+:root{
+  --bg:#f5f8ff; --card:#ffffff; --ink:#24193f; --muted:#5a4f72; --line:#ddd3ef; --shadow:#cdc0e6;
+  --blue:#2d6cdf; --blue-t:#e3ecfd;
+  --orange:#c2531a; --orange-t:#fdeadf;
+  --green:#1b8a52; --green-t:#dcf3e6;
+  --purple:#2f5fd0; --purple-t:#e2ebff; --yellow-t:#fff2bf;
+  --pink:#b8336a; --pink-t:#fbe4ee;
+  --teal:#0f7b8a; --teal-t:#dcf2f4;
+  --star:#ffc93c; --star-edge:#b8860b;
+  --on-accent:#ffffff;
+  --display:'Fredoka','Noto Sans Hebrew',system-ui,sans-serif;
+  --hebrew:'Noto Sans Hebrew','Arial Hebrew',system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16112b; --card:#221a40; --ink:#f4f0ff; --muted:#c1b6dd; --line:#3a2f63; --shadow:#0c0820;
+    --blue:#86b3ff; --blue-t:#1f2f5e; --orange:#ff9d66; --orange-t:#43261a;
+    --green:#62d69d; --green-t:#173d2b; --purple:#8fb0ff; --purple-t:#1f2c5c; --yellow-t:#3d3412;
+    --pink:#ff8dbb; --pink-t:#46203a; --teal:#5fd0de; --teal-t:#143c44;
+    --star:#ffd257; --star-edge:#c99a1e; --on-accent:#140e28; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16112b; --card:#221a40; --ink:#f4f0ff; --muted:#c1b6dd; --line:#3a2f63; --shadow:#0c0820;
+  --blue:#86b3ff; --blue-t:#1f2f5e; --orange:#ff9d66; --orange-t:#43261a;
+  --green:#62d69d; --green-t:#173d2b; --purple:#8fb0ff; --purple-t:#1f2c5c; --yellow-t:#3d3412;
+  --pink:#ff8dbb; --pink-t:#46203a; --teal:#5fd0de; --teal-t:#143c44;
+  --star:#ffd257; --star-edge:#c99a1e; --on-accent:#140e28; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--display);-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;touch-action:manipulation}
+button:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
+.heb{font-family:var(--hebrew)}
+.app{max-width:560px;margin:0 auto;min-height:100%;padding-block:16px 28px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:16px}
+.t-blue{--c:var(--blue);--ct:var(--blue-t)}
+.t-orange{--c:var(--orange);--ct:var(--orange-t)}
+.t-green{--c:var(--green);--ct:var(--green-t)}
+.t-purple{--c:var(--purple);--ct:var(--purple-t)}
+.t-pink{--c:var(--pink);--ct:var(--pink-t)}
+.t-teal{--c:var(--teal);--ct:var(--teal-t)}
+
+/* home */
+.hello{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--purple-t);border-radius:28px;padding:18px 20px}
+.hello h1{margin:0;font-size:36px;line-height:1.2;font-weight:800}
+.hello p{margin:4px 0 0;font-size:20px;color:var(--muted)}
+.pill{display:inline-flex;align-items:center;gap:6px;background:var(--card);border:2px solid var(--line);border-radius:999px;padding:6px 14px 6px 12px;font-size:22px;font-weight:600;font-variant-numeric:tabular-nums;flex-shrink:0}
+.pill svg{width:26px;height:26px}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.tile{background:var(--ct);border-radius:26px;min-height:172px;padding:14px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;box-shadow:0 5px 0 var(--shadow);transition:transform .1s}
+.tile:active{transform:translateY(4px);box-shadow:0 1px 0 var(--shadow)}
+.tile .glyph{font-size:50px;line-height:1.2;font-weight:800;color:var(--c);min-height:62px;display:flex;align-items:center}
+.tile .tt{font-size:22px;font-weight:800}
+.tile .td{font-size:14px;color:var(--muted);line-height:1.35}
+.sec{margin:6px 4px -4px;font-size:16px;font-weight:700;color:var(--muted)}
+.foot{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ghost{border:2px dashed var(--line);border-radius:16px;padding:12px 16px;font-size:16px;color:var(--muted);min-height:48px}
+.note{background:var(--card);border:2px dashed var(--line);border-radius:18px;padding:12px 16px;font-size:15px;line-height:1.45;color:var(--muted);margin:0}
+
+/* shared */
+.round{width:52px;height:52px;border-radius:26px;background:var(--card);border:2px solid var(--line);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.round svg{width:26px;height:26px;fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.bar{display:flex;align-items:center;gap:12px}
+.bar .bt{flex:1;margin:0;text-align:center;font-size:26px;font-weight:800}
+.dots{flex:1;display:flex;justify-content:center;gap:7px;flex-wrap:wrap}
+.dot{width:14px;height:14px;border-radius:7px;background:var(--line)}
+.dot.done{background:var(--c)}
+.dot.now{background:var(--card);box-shadow:0 0 0 3px var(--c) inset}
+
+/* game */
+.prompt{position:relative;background:var(--ct);border-radius:30px;padding:18px 16px 16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:210px}
+.prompt .say{position:absolute;top:12px;left:12px}
+.big{font-size:clamp(110px,34vw,150px);line-height:1.2;font-weight:800}
+.pic{font-size:104px;line-height:1.15}
+.flashword{font-size:clamp(52px,15vw,72px);font-weight:800;line-height:1.6}
+.hidden-q{font-size:96px;font-weight:800;color:var(--c);line-height:1.2}
+.q{margin:0;text-align:center;font-size:24px;font-weight:800;line-height:1.5}
+.opts{display:grid;gap:12px}
+.c1{grid-template-columns:1fr}
+.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.opt{background:var(--card);border:3px solid var(--line);border-radius:24px;min-height:100px;padding:8px 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 5px 0 var(--shadow);transition:transform .1s,background .15s}
+.opt:active{transform:translateY(4px);box-shadow:0 1px 0 var(--shadow)}
+.opt.wordbig{font-size:44px;font-weight:800;min-height:96px;line-height:1.5}
+.opt.wordmid{font-size:32px;font-weight:800;min-height:96px;line-height:1.5}
+.opt.sylopt{font-size:64px;font-weight:800;line-height:1.3;min-height:116px}
+.opt.txt{font-size:24px;font-weight:700;min-height:70px;line-height:1.6;padding:10px 16px}
+.opt.picopt{font-size:40px;letter-spacing:-2px;flex-direction:row;flex-wrap:wrap;min-height:110px}
+.opt.ok{border-color:var(--green);background:var(--green-t);box-shadow:0 5px 0 var(--green)}
+.opt.no{opacity:.35;animation:shake .4s}
+.sentence{margin:0;font-size:32px;line-height:1.9;font-weight:800;text-align:center;padding:10px 44px 0}
+.story-t{margin:0;font-size:24px;font-weight:800;color:var(--c);text-align:center;padding:4px 48px 0}
+.story{margin:0;font-size:23px;line-height:2.05;font-weight:600;text-align:right;align-self:stretch}
+.sq{margin:0;text-align:center;font-size:26px;font-weight:800;line-height:1.6;background:var(--card);border:3px solid var(--c);border-radius:22px;padding:10px 14px}
+.qn{font-size:16px;color:var(--muted);font-weight:700;text-align:center;margin:0}
+.tip{margin:0;text-align:center;font-size:17px;color:var(--muted);line-height:1.6}
+.fb{margin:0;min-height:40px;text-align:center;font-size:28px;font-weight:800;color:var(--green)}
+.fb.try{color:var(--orange)}
+.again{align-self:center;min-height:52px;border-radius:18px;border:2px solid var(--line);background:var(--card);padding:8px 18px;font-size:19px;font-weight:700;box-shadow:0 3px 0 var(--shadow)}
+.wait{min-height:120px;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--muted);font-weight:700;text-align:center}
+
+/* tower */
+.tower{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 40px 0;width:100%}
+.tline{margin:0;font-size:26px;line-height:1.8;font-weight:700;color:var(--muted);text-align:center;opacity:.75}
+.tline.now{font-size:34px;color:var(--ink);opacity:1}
+.timer{font-size:60px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--c);line-height:1.2}
+.btn{flex:1;min-width:140px;min-height:62px;border-radius:20px;font-size:23px;font-weight:800;background:var(--card);border:3px solid var(--line);box-shadow:0 5px 0 var(--shadow)}
+.btn:active{transform:translateY(4px);box-shadow:0 1px 0 var(--shadow)}
+.btn.primary{background:var(--purple);color:var(--on-accent);border-color:var(--purple)}
+.btn.go{background:var(--green);color:var(--on-accent);border-color:var(--green)}
+.big-msg{margin:0;font-size:30px;font-weight:800;text-align:center;line-height:1.5}
+.record{color:var(--orange)}
+
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+@keyframes pop{0%{transform:scale(.6)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+.ok{animation:pop .35s}
+
+/* end */
+.end{display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;padding-top:24px}
+.end h1{margin:0;font-size:38px;font-weight:800;line-height:1.3}
+.stars{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;max-width:340px}
+.stars svg{width:62px;height:62px}
+.score{font-size:24px;font-weight:700;color:var(--muted);margin:0}
+.row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;width:100%}
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:5}
+.confetti span{position:absolute;top:-24px;width:11px;height:16px;border-radius:3px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+
+/* settings */
+.panel{background:var(--card);border:2px solid var(--line);border-radius:24px;padding:18px 16px;display:flex;flex-direction:column;gap:12px}
+.panel h3{margin:0;font-size:22px}
+.panel p{margin:0;font-size:16px;line-height:1.5;color:var(--muted)}
+.seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;background:var(--bg);border:2px solid var(--line);border-radius:22px;padding:6px}
+.seg button{min-height:54px;border-radius:16px;font-size:19px;font-weight:700}
+.seg button[aria-pressed="true"]{background:var(--purple);color:var(--on-accent)}
+.small{flex:1;min-height:50px;border-radius:16px;border:2px solid var(--line);font-size:17px;font-weight:600}
+.prog{width:100%;border-collapse:collapse;font-size:16px}
+.prog td{padding:8px 4px;border-bottom:1px solid var(--line)}
+.prog td:last-child{text-align:left;font-variant-numeric:tabular-nums;color:var(--muted)}
+.meter{height:10px;border-radius:5px;background:var(--line);overflow:hidden;margin-top:4px}
+.meter i{display:block;height:100%;background:var(--purple)}
+.steps{margin:0;padding-inline-start:22px;display:flex;flex-direction:column;gap:6px;font-size:16px;line-height:1.5;color:var(--muted)}
+.steps b{color:var(--ink)}
+
+/* exit confirm */
+.modal{position:fixed;inset:0;z-index:20;background:rgba(16,10,34,.55);display:flex;align-items:center;justify-content:center;padding:24px 16px}
+.sheet{width:100%;max-width:400px;background:var(--card);border-radius:30px;padding:24px 18px 20px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;box-shadow:0 12px 0 var(--shadow);animation:pop .3s}
+.sheet .face{font-size:64px;line-height:1}
+.sheet h2{margin:0;font-size:30px;font-weight:800}
+.sheet p{margin:0;font-size:18px;color:var(--muted)}
+.sheet .btn{width:100%;flex:none}
+
+@media (prefers-reduced-motion: reduce){
+  .sheet,.opt.no,.ok{animation:none}
+  .confetti{display:none}
+  .tile,.opt{transition:none}
+}
+.hello{background:var(--yellow-t)}
+.nq{display:inline-flex;align-items:center;gap:8px;min-height:52px;padding:6px 14px;border-radius:26px;background:var(--card);border:2px solid var(--line);font-size:18px;font-weight:700}
+.nq b{font-size:24px;color:var(--purple)}
+.bar .nq{min-height:52px;padding:4px 12px;font-size:22px}
+.hint{align-self:center;min-height:48px;border-radius:16px;border:2px dashed var(--line);padding:6px 16px;font-size:17px;font-weight:700;color:var(--muted);background:var(--card)}
+.plainword{font-size:clamp(56px,16vw,84px);font-weight:800;line-height:1.5}
+.pointed{font-size:30px;color:var(--muted);font-weight:700}
+.opt.emo{font-size:72px;min-height:130px;line-height:1.1}
+.catch{background:var(--yellow-t);border-radius:28px;padding:16px 20px;display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;animation:pop .5s}
+.catch .ce{font-size:72px;line-height:1.1}
+.catch .cn{font-size:28px;font-weight:800}
+.catch .ct{font-size:18px;color:var(--muted)}
+.coll{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:20px;min-height:110px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:8px 4px;text-align:center}
+.card .ce{font-size:44px;line-height:1.2}
+.card .cn{font-size:16px;font-weight:700}
+.card.no{opacity:.45;border-style:dashed}
+.tile .td{display:block}
+.tile.wide{grid-column:1/-1;min-height:110px;flex-direction:row;gap:14px}
+</style>
+</head><body>
+<div class="app" id="app" dir="rtl"></div>
+<script>
+(function(){
+/* ---------- content: every text has [with niqqud, without niqqud] ---------- */
+/* reading tower: [pointed, plain] sentences with the same number of words */
+var TOWER=[
+ ['פיקאצ׳ו קָפַץ עַל הַסֶּלַע וְשָׁלַח בָּרָק חָזָק.','פיקאצ׳ו קפץ על הסלע ושלח ברק חזק.'],
+ ['אֵלִיָּה וְהֶחָבֵר שֶׁלּוֹ יָצְאוּ לְחַפֵּשׂ פּוֹקִימוֹנִים בַּיַּעַר.','אליה והחבר שלו יצאו לחפש פוקימונים ביער.'],
+ ['סקווירטל הִתִּיז מַיִם וְכִבָּה אֶת הָאֵשׁ.','סקווירטל התיז מים וכיבה את האש.'],
+ ['סנורלקס נִרְדַּם בְּאֶמְצַע הַדֶּרֶךְ וְאַף אֶחָד לֹא הִצְלִיחַ לַעֲבֹר.','סנורלקס נרדם באמצע הדרך ואף אחד לא הצליח לעבור.'],
+ ['הַמְּאַמֵּן אֵלִיָּה זָרַק אֶת הַכַּדּוּר וְתָפַס פּוֹקִימוֹן חָדָשׁ.','המאמן אליה זרק את הכדור ותפס פוקימון חדש.'],
+ ['בַּלַּיְלָה ג׳נגר מִסְתַּתֵּר בַּצְּלָלִים וְצוֹחֵק בְּשֶׁקֶט.','בלילה ג׳נגר מסתתר בצללים וצוחק בשקט.'],
+ ['צ׳רמנדר שָׁמַר עַל הַלֶּהָבָה שֶׁלּוֹ שֶׁלֹּא תִּכְבֶּה בַּגֶּשֶׁם.','צ׳רמנדר שמר על הלהבה שלו שלא תכבה בגשם.'],
+ ['אֵלִיָּה קִבֵּל תָּג חָדָשׁ אַחֲרֵי קְרָב אָרֹךְ וְקָשֶׁה.','אליה קיבל תג חדש אחרי קרב ארוך וקשה.'],
+ ['כָּל הַפּוֹקִימוֹנִים שֶׁל אֵלִיָּה חִכּוּ לוֹ לְיַד הַבַּיִת.','כל הפוקימונים של אליה חיכו לו ליד הבית.'],
+ ['אֵלִיָּה קוֹרֵא מַהֵר יוֹתֵר מִיּוֹם לְיוֹם, כְּמוֹ אַלּוּף אֲמִתִּי.','אליה קורא מהר יותר מיום ליום, כמו אלוף אמיתי.']
+];
+/* flash: groups of look-alike words, any one can be the target */
+var GROUPS=[
+ [['מַחְבֶּרֶת','מחברת'],['מַחֲבַת','מחבת'],['מִבְרֶשֶׁת','מברשת'],['מִסְגֶּרֶת','מסגרת']],
+ [['שֻׁלְחָן','שולחן'],['שׁוֹלֵחַ','שולח'],['שֻׁלְחָנוֹת','שולחנות'],['לַשֻּׁלְחָן','לשולחן']],
+ [['כַּדּוּר','כדור'],['כַּדּוּרִים','כדורים'],['כִּדְרוּר','כדרור'],['כַּד','כד']],
+ [['בָּרָק','ברק'],['בְּרֵכָה','בריכה'],['בָּרָד','ברד'],['בֶּרֶךְ','ברך']],
+ [['מְאַמֵּן','מאמן'],['מַאֲמִין','מאמין'],['אִמּוּן','אימון'],['נֶאֱמָן','נאמן']],
+ [['חָבֵר','חבר'],['חֶבְרָה','חברה'],['חֲבֵרִים','חברים'],['חִבּוּר','חיבור']],
+ [['סִפּוּר','סיפור'],['סְפָרִים','ספרים'],['סִפְרִיָּה','ספרייה'],['סְפִירָה','ספירה']],
+ [['מַטְרִיָּה','מטרייה'],['מַטָּרָה','מטרה'],['מָטָר','מטר'],['מַטְבֵּעַ','מטבע']],
+ [['יַלְדָּה','ילדה'],['יְלָדִים','ילדים'],['יַלְדוּת','ילדות'],['יַלְקוּט','ילקוט']],
+ [['שָׁמַיִם','שמיים'],['שֶׁמֶשׁ','שמש'],['שְׁמָשׁוֹת','שמשות'],['שִׁמּוּשׁ','שימוש']],
+ [['קְרָבוֹת','קרבות'],['קָרוֹב','קרוב'],['קְרוֹבִים','קרובים'],['קַרְבַּיִם','קרביים']],
+ [['תָּג','תג'],['תַּגִּים','תגים'],['תָּוִית','תווית'],['תַּגְלִית','תגלית']]
+];
+/* complete the sentence: [sentence pointed, plain], answer, two wrong */
+var CLOZE=[
+ {s:['פיקאצ׳ו הוּא פּוֹקִימוֹן מִסּוּג ___.','פיקאצ׳ו הוא פוקימון מסוג ___.'],a:['חַשְׁמַל','חשמל'],w:[['מַיִם','מים'],['אֵשׁ','אש']]},
+ {s:['כְּשֶׁיּוֹרֵד גֶּשֶׁם, אֵלִיָּה לוֹקֵחַ ___.','כשיורד גשם, אליה לוקח ___.'],a:['מַטְרִיָּה','מטרייה'],w:[['כַּפִּית','כפית'],['כַּרְטִיס','כרטיס']]},
+ {s:['צ׳רמנדר לֹא אוֹהֵב ___ כִּי הֵם מְכַבִּים לוֹ אֶת הָאֵשׁ.','צ׳רמנדר לא אוהב ___ כי הם מכבים לו את האש.'],a:['מַיִם','מים'],w:[['עָלִים','עלים'],['אֲבָנִים','אבנים']]},
+ {s:['אֵלִיָּה הָיָה ___, אָז הוּא אָכַל כָּרִיךְ גָּדוֹל.','אליה היה ___, אז הוא אכל כריך גדול.'],a:['רָעֵב','רעב'],w:[['עָיֵף','עייף'],['שָׂמֵחַ','שמח']]},
+ {s:['סנורלקס ___ כָּל הַיּוֹם וְלֹא זָז מִמְּקוֹמוֹ.','סנורלקס ___ כל היום ולא זז ממקומו.'],a:['יָשֵׁן','ישן'],w:[['רָץ','רץ'],['קוֹפֵץ','קופץ']]},
+ {s:['בַּחֹרֶף מֶזֶג הָאֲוִיר ___, וְאֵלִיָּה לוֹבֵשׁ מְעִיל.','בחורף מזג האוויר ___, ואליה לובש מעיל.'],a:['קַר','קר'],w:[['חַם','חם'],['יָבֵשׁ','יבש']]},
+ {s:['הַמְּאַמֵּן ___ אֶת הַפּוֹקִימוֹן שֶׁלּוֹ אַחֲרֵי הַקְּרָב, כִּי הוּא הָיָה פָּצוּעַ.','המאמן ___ את הפוקימון שלו אחרי הקרב, כי הוא היה פצוע.'],a:['רִפֵּא','ריפא'],w:[['שָׁכַח','שכח'],['מָכַר','מכר']]},
+ {s:['כְּדֵי לִקְנוֹת קְלָפִים בַּחֲנוּת, אֵלִיָּה צָרִיךְ ___.','כדי לקנות קלפים בחנות, אליה צריך ___.'],a:['כֶּסֶף','כסף'],w:[['כּוֹבַע','כובע'],['סֵפֶר','ספר']]},
+ {s:['הַצִּפּוֹר בָּנְתָה ___ עַל הָעֵץ.','הציפור בנתה ___ על העץ.'],a:['קֵן','קן'],w:[['סִירָה','סירה'],['מְכוֹנִית','מכונית']]},
+ {s:['מגיקארפ הוּא דָּג, לָכֵן הוּא חַי ___.','מגיקארפ הוא דג, לכן הוא חי ___.'],a:['בַּמַּיִם','במים'],w:[['בַּמִּדְבָּר','במדבר'],['בַּשָּׁמַיִם','בשמיים']]},
+ {s:['אֵלִיָּה ___ אֶת הַשִּׁעוּרִים לִפְנֵי שֶׁיָּצָא לְשַׂחֵק.','אליה ___ את השיעורים לפני שיצא לשחק.'],a:['הֵכִין','הכין'],w:[['שָׁתָה','שתה'],['אָכַל','אכל']]},
+ {s:['בַּלַּיְלָה אֵלִיָּה רוֹאֶה בַּשָּׁמַיִם ___ וְכוֹכָבִים.','בלילה אליה רואה בשמיים ___ וכוכבים.'],a:['יָרֵחַ','ירח'],w:[['שֶׁמֶשׁ','שמש'],['קֶשֶׁת','קשת']]},
+ {s:['פיקאצ׳ו הָיָה עָיֵף מְאוֹד, אָז הוּא ___ עַל הַכָּרִית שֶׁל אֵלִיָּה.','פיקאצ׳ו היה עייף מאוד, אז הוא ___ על הכרית של אליה.'],a:['נִרְדַּם','נרדם'],w:[['רָקַד','רקד'],['צָעַק','צעק']]},
+ {s:['אֵלִיָּה נִצַּח בַּקְּרָב וְהָיָה ___ מְאוֹד.','אליה ניצח בקרב והיה ___ מאוד.'],a:['שָׂמֵחַ','שמח'],w:[['עָצוּב','עצוב'],['רָעֵב','רעב']]}
+];
+/* reading without niqqud: plain word, pointed hint, picture */
+var PLAIN=[
+ ['מטוס','מָטוֹס','✈️'],['אופניים','אוֹפַנַּיִם','🚲'],['מחשב','מַחְשֵׁב','💻'],['שעון','שָׁעוֹן','⏰'],
+ ['מפתח','מַפְתֵּחַ','🔑'],['מטרייה','מַטְרִיָּה','☂️'],['תפוח','תַּפּוּחַ','🍎'],['אבטיח','אֲבַטִּיחַ','🍉'],
+ ['ענבים','עֲנָבִים','🍇'],['גלידה','גְּלִידָה','🍦'],['כדורגל','כַּדּוּרֶגֶל','⚽'],['גיטרה','גִּיטָרָה','🎸'],
+ ['רכבת','רַכֶּבֶת','🚂'],['אוטובוס','אוֹטוֹבּוּס','🚌'],['הר געש','הַר גַּעַשׁ','🌋'],['קשת','קֶשֶׁת','🌈'],
+ ['ברק','בָּרָק','⚡'],['שלג','שֶׁלֶג','❄️'],['תמנון','תְּמָנוּן','🐙'],['צפרדע','צְפַרְדֵּעַ','🐸'],
+ ['ינשוף','יַנְשׁוּף','🦉'],['נמר','נָמֵר','🐯'],['זברה','זֶבְּרָה','🦓'],['ג׳ירפה','גִ׳ירָפָה','🦒'],
+ ['טלפון','טֶלֶפוֹן','📱'],['מצלמה','מַצְלֵמָה','📷'],['מספריים','מִסְפָּרַיִם','✂️'],['עיפרון','עִפָּרוֹן','✏️'],
+ ['חללית','חֲלָלִית','🚀'],['יהלום','יַהֲלוֹם','💎'],['פטרייה','פִּטְרִיָּה','🍄'],['מגנט','מַגְנֵט','🧲'],
+ ['דרקון','דְּרָקוֹן','🐉'],['לווייתן','לִוְיָתָן','🐋'],['תנין','תַּנִּין','🐊'],['עכביש','עַכָּבִישׁ','🕷️']
+];
+/* stories: title, text, questions; every text is [pointed, plain] */
+var STORIES=[
+ {t:['הַתָּג הָרִאשׁוֹן שֶׁל אֵלִיָּה','התג הראשון של אליה'],
+  x:['אֵלִיָּה רָצָה מְאוֹד לְנַצֵּחַ בַּקְּרָב הָרִאשׁוֹן שֶׁלּוֹ. הוּא הִתְאַמֵּן עִם פיקאצ׳ו כָּל בֹּקֶר, עוֹד לִפְנֵי בֵּית הַסֵּפֶר. בַּקְּרָב, הַיָּרִיב שֶׁלּוֹ שָׁלַח פּוֹקִימוֹן מִסּוּג אֶבֶן. פיקאצ׳ו שָׁלַח בָּרָק, אֲבָל זֶה כִּמְעַט לֹא עָזַר. אֵלִיָּה לֹא וִתֵּר. הוּא אָמַר לפיקאצ׳ו לִהְיוֹת מָהִיר וּלְהִתְחַמֵּק, עַד שֶׁהַיָּרִיב הִתְעַיֵּף. בַּסּוֹף אֵלִיָּה נִצַּח וְקִבֵּל אֶת הַתָּג הָרִאשׁוֹן שֶׁלּוֹ.',
+     'אליה רצה מאוד לנצח בקרב הראשון שלו. הוא התאמן עם פיקאצ׳ו כל בוקר, עוד לפני בית הספר. בקרב, היריב שלו שלח פוקימון מסוג אבן. פיקאצ׳ו שלח ברק, אבל זה כמעט לא עזר. אליה לא ויתר. הוא אמר לפיקאצ׳ו להיות מהיר ולהתחמק, עד שהיריב התעייף. בסוף אליה ניצח וקיבל את התג הראשון שלו.'],
+  qs:[[['מָתַי אֵלִיָּה הִתְאַמֵּן?','מתי אליה התאמן?'],['כָּל בֹּקֶר לִפְנֵי בֵּית הַסֵּפֶר','כל בוקר לפני בית הספר'],['כָּל עֶרֶב','כל ערב'],['רַק בְּשַׁבָּת','רק בשבת']],
+      [['לָמָּה הַבָּרָק כִּמְעַט לֹא עָזַר?','למה הברק כמעט לא עזר?'],['כִּי הַיָּרִיב הָיָה מִסּוּג אֶבֶן','כי היריב היה מסוג אבן'],['כִּי פיקאצ׳ו הָיָה עָיֵף','כי פיקאצ׳ו היה עייף'],['כִּי יָרַד גֶּשֶׁם','כי ירד גשם']],
+      [['מָה לוֹמְדִים עַל אֵלִיָּה מֵהַמִּשְׁפָּט "אֵלִיָּה לֹא וִתֵּר"?','מה לומדים על אליה מהמשפט "אליה לא ויתר"?'],['שֶׁהוּא מַמְשִׁיךְ לְהִתְאַמֵּץ גַּם כְּשֶׁקָּשֶׁה','שהוא ממשיך להתאמץ גם כשקשה'],['שֶׁהוּא כּוֹעֵס מַהֵר','שהוא כועס מהר'],['שֶׁהוּא לֹא אוֹהֵב קְרָבוֹת','שהוא לא אוהב קרבות']],
+      [['אֵיךְ אֵלִיָּה נִצַּח בַּסּוֹף?','איך אליה ניצח בסוף?'],['פיקאצ׳ו הִתְחַמֵּק עַד שֶׁהַיָּרִיב הִתְעַיֵּף','פיקאצ׳ו התחמק עד שהיריב התעייף'],['פיקאצ׳ו שָׁלַח בָּרָק עֲנָק','פיקאצ׳ו שלח ברק ענק'],['הַיָּרִיב בָּרַח הַבַּיְתָה','היריב ברח הביתה']]]},
+ {t:['אֵלִיָּה וסנורלקס עַל הַגֶּשֶׁר','אליה וסנורלקס על הגשר'],
+  x:['בַּדֶּרֶךְ לָעִיר הַבָּאָה הָיָה גֶּשֶׁר צַר מֵעַל נָהָר. עַל הַגֶּשֶׁר שָׁכַב סנורלקס עֲנָק וְנָחַר בְּקוֹל רָם. אֵלִיָּה נִסָּה לִדְחֹף אוֹתוֹ, אֲבָל הוּא הָיָה כָּבֵד מִדַּי. אָז אֵלִיָּה נִזְכַּר שֶׁסַּבָּא שֶׁלּוֹ נָתַן לוֹ חָלִיל קָטָן. הוּא נִגֵּן מַנְגִּינָה שְׂמֵחָה, וסנורלקס פָּקַח עֵינַיִם, פִּהֵק וְזָז הַצִּדָּה. עַכְשָׁו כֻּלָּם יָכְלוּ לַעֲבֹר.',
+     'בדרך לעיר הבאה היה גשר צר מעל נהר. על הגשר שכב סנורלקס ענק ונחר בקול רם. אליה ניסה לדחוף אותו, אבל הוא היה כבד מדי. אז אליה נזכר שסבא שלו נתן לו חליל קטן. הוא ניגן מנגינה שמחה, וסנורלקס פקח עיניים, פיהק וזז הצידה. עכשיו כולם יכלו לעבור.'],
+  qs:[[['אֵיפֹה שָׁכַב סנורלקס?','איפה שכב סנורלקס?'],['עַל גֶּשֶׁר מֵעַל נָהָר','על גשר מעל נהר'],['בְּאֶמְצַע הָעִיר','באמצע העיר'],['בְּתוֹךְ מְעָרָה','בתוך מערה']],
+      [['לָמָּה אֵלִיָּה לֹא הִצְלִיחַ לִדְחֹף אֶת סנורלקס?','למה אליה לא הצליח לדחוף את סנורלקס?'],['כִּי הוּא הָיָה כָּבֵד מִדַּי','כי הוא היה כבד מדי'],['כִּי הוּא פָּחַד מִמֶּנּוּ','כי הוא פחד ממנו'],['כִּי הַגֶּשֶׁר נִשְׁבַּר','כי הגשר נשבר']],
+      [['מִי נָתַן לְאֵלִיָּה אֶת הֶחָלִיל?','מי נתן לאליה את החליל?'],['סַבָּא שֶׁלּוֹ','סבא שלו'],['הַמּוֹרָה','המורה'],['חָבֵר מֵהַכִּתָּה','חבר מהכיתה']],
+      [['מָה פֵּרוּשׁ הַמִּלָּה "פִּהֵק"?','מה פירוש המילה "פיהק"?'],['פָּתַח אֶת הַפֶּה כִּי הָיָה עָיֵף','פתח את הפה כי היה עייף'],['צָעַק חָזָק','צעק חזק'],['קָפַץ גָּבוֹהַּ','קפץ גבוה']]]},
+ {t:['הַבֵּיצָה שֶׁאֵלִיָּה מָצָא','הביצה שאליה מצא'],
+  x:['בְּיוֹם שִׁשִּׁי מָצָא אֵלִיָּה בֵּיצָה גְּדוֹלָה עִם נְקֻדּוֹת סְגֻלּוֹת. הוּא עָטַף אוֹתָהּ בִּשְׂמִיכָה וְשָׁמַר עָלֶיהָ חַמָּה. כָּל עֶרֶב אֵלִיָּה שָׁמַע מִבִּפְנִים דְּפִיקוֹת קְטַנּוֹת. אַחֲרֵי שְׁלוֹשָׁה יָמִים הַבֵּיצָה נִסְדְּקָה, וְיָצָא מִמֶּנָּה איווי קָטָן וּמְבֻלְבָּל. אֵלִיָּה חִיֵּךְ וְנָתַן לוֹ קְעָרָה עִם חָלָב.',
+     'ביום שישי מצא אליה ביצה גדולה עם נקודות סגולות. הוא עטף אותה בשמיכה ושמר עליה חמה. כל ערב אליה שמע מבפנים דפיקות קטנות. אחרי שלושה ימים הביצה נסדקה, ויצא ממנה איווי קטן ומבולבל. אליה חייך ונתן לו קערה עם חלב.'],
+  qs:[[['אֵיךְ נִרְאֲתָה הַבֵּיצָה?','איך נראתה הביצה?'],['גְּדוֹלָה עִם נְקֻדּוֹת סְגֻלּוֹת','גדולה עם נקודות סגולות'],['קְטַנָּה וּלְבָנָה','קטנה ולבנה'],['כְּחֻלָּה עִם פַּסִּים','כחולה עם פסים']],
+      [['לָמָּה אֵלִיָּה עָטַף אֶת הַבֵּיצָה בִּשְׂמִיכָה?','למה אליה עטף את הביצה בשמיכה?'],['כְּדֵי לִשְׁמֹר עָלֶיהָ חַמָּה','כדי לשמור עליה חמה'],['כְּדֵי לְהַסְתִּיר אוֹתָהּ','כדי להסתיר אותה'],['כְּדֵי שֶׁלֹּא תִּתְלַכְלֵךְ','כדי שלא תתלכלך']],
+      [['בְּאֵיזֶה יוֹם הַבֵּיצָה נִסְדְּקָה? (חֲשֹׁב!)','באיזה יום הביצה נסדקה? (חשוב!)'],['בְּיוֹם שֵׁנִי','ביום שני'],['בְּיוֹם שִׁשִּׁי','ביום שישי'],['בְּיוֹם רִאשׁוֹן','ביום ראשון']],
+      [['אֵיךְ אֵלִיָּה יָדַע שֶׁיֵּשׁ מַשֶּׁהוּ חַי בְּתוֹךְ הַבֵּיצָה?','איך אליה ידע שיש משהו חי בתוך הביצה?'],['הוּא שָׁמַע דְּפִיקוֹת קְטַנּוֹת','הוא שמע דפיקות קטנות'],['הוּא רָאָה נְקֻדּוֹת סְגֻלּוֹת','הוא ראה נקודות סגולות'],['הַבֵּיצָה הָיְתָה גְּדוֹלָה','הביצה הייתה גדולה']]]},
+ {t:['הַמֵּרוֹץ בַּכִּתָּה שֶׁל אֵלִיָּה','המרוץ בכיתה של אליה'],
+  x:['בְּבֵית הַסֵּפֶר שֶׁל אֵלִיָּה הָיָה מֵרוֹץ שֶׁל פּוֹקִימוֹנִים. צ׳רמנדר שֶׁל נוֹעָה הָיָה הַמָּהִיר בְּיוֹתֵר, וְכֻלָּם חָשְׁבוּ שֶׁהוּא יְנַצֵּחַ. בְּאֶמְצַע הַמֵּרוֹץ הִתְחִיל לָרֶדֶת גֶּשֶׁם חָזָק. צ׳רמנדר נֶעֱצַר מִתַּחַת לְעֵץ, כִּי הַגֶּשֶׁם הִפְרִיעַ לַלֶּהָבָה שֶׁבַּזָּנָב שֶׁלּוֹ. סקווירטל שֶׁל אֵלִיָּה דַּוְקָא שָׂמַח בַּגֶּשֶׁם, וְרָץ מַהֵר מִתָּמִיד. הוּא הִגִּיעַ רִאשׁוֹן לְקַו הַסִּיּוּם.',
+     'בבית הספר של אליה היה מרוץ של פוקימונים. צ׳רמנדר של נועה היה המהיר ביותר, וכולם חשבו שהוא ינצח. באמצע המרוץ התחיל לרדת גשם חזק. צ׳רמנדר נעצר מתחת לעץ, כי הגשם הפריע ללהבה שבזנב שלו. סקווירטל של אליה דווקא שמח בגשם, ורץ מהר מתמיד. הוא הגיע ראשון לקו הסיום.'],
+  qs:[[['שֶׁל מִי הָיָה צ׳רמנדר?','של מי היה צ׳רמנדר?'],['שֶׁל נוֹעָה','של נועה'],['שֶׁל אֵלִיָּה','של אליה'],['שֶׁל הַמּוֹרֶה','של המורה']],
+      [['לָמָּה צ׳רמנדר נֶעֱצַר?','למה צ׳רמנדר נעצר?'],['כִּי הַגֶּשֶׁם הִפְרִיעַ לַלֶּהָבָה שֶׁלּוֹ','כי הגשם הפריע ללהבה שלו'],['כִּי הוּא הָיָה עָיֵף','כי הוא היה עייף'],['כִּי הוּא נִפְצַע','כי הוא נפצע']],
+      [['מִי נִצַּח בַּמֵּרוֹץ?','מי ניצח במרוץ?'],['סקווירטל שֶׁל אֵלִיָּה','סקווירטל של אליה'],['צ׳רמנדר שֶׁל נוֹעָה','צ׳רמנדר של נועה'],['פיקאצ׳ו','פיקאצ׳ו']],
+      [['לָמָּה הַגֶּשֶׁם עָזַר לסקווירטל?','למה הגשם עזר לסקווירטל?'],['כִּי הוּא פּוֹקִימוֹן שֶׁל מַיִם','כי הוא פוקימון של מים'],['כִּי הוּא אוֹהֵב לִישֹׁן','כי הוא אוהב לישון'],['כִּי הוּא הָיָה רָעֵב','כי הוא היה רעב']]]},
+ {t:['אֵלִיָּה וג׳נגר בַּסִּפְרִיָּה','אליה וג׳נגר בספרייה'],
+  x:['בְּכָל לַיְלָה נֶעֶלְמוּ סְפָרִים מֵהַסִּפְרִיָּה שֶׁל הָעִיר. הַסַּפְרָנִית הָיְתָה מֻדְאֶגֶת וּבִקְּשָׁה מֵאֵלִיָּה לַעֲזֹר. אֵלִיָּה הִתְחַבֵּא מֵאֲחוֹרֵי מַדָּף וְחִכָּה. בַּחֲצוֹת הוּא רָאָה צֵל סָגֹל צוֹחֵק, שֶׁלּוֹקֵחַ סֵפֶר וּבוֹרֵחַ. זֶה הָיָה ג׳נגר! הִתְבָּרֵר שֶׁהוּא פָּשׁוּט אָהַב סִפּוּרִים, אֲבָל לֹא הָיָה לוֹ מִי שֶׁיַּקְרִיא לוֹ. מֵאָז אֵלִיָּה מַקְרִיא לג׳נגר סִפּוּר כָּל עֶרֶב, וְהַסְּפָרִים כְּבָר לֹא נֶעֱלָמִים.',
+     'בכל לילה נעלמו ספרים מהספרייה של העיר. הספרנית הייתה מודאגת וביקשה מאליה לעזור. אליה התחבא מאחורי מדף וחיכה. בחצות הוא ראה צל סגול צוחק, שלוקח ספר ובורח. זה היה ג׳נגר! התברר שהוא פשוט אהב סיפורים, אבל לא היה לו מי שיקריא לו. מאז אליה מקריא לג׳נגר סיפור כל ערב, והספרים כבר לא נעלמים.'],
+  qs:[[['מָה הָיְתָה הַבְּעָיָה בַּסִּפְרִיָּה?','מה הייתה הבעיה בספרייה?'],['סְפָרִים נֶעֶלְמוּ בַּלַּיְלָה','ספרים נעלמו בלילה'],['הַסִּפְרִיָּה הָיְתָה סְגוּרָה','הספרייה הייתה סגורה'],['לֹא הָיָה אוֹר','לא היה אור']],
+      [['מָה פֵּרוּשׁ הַמִּלָּה "מֻדְאֶגֶת"?','מה פירוש המילה "מודאגת"?'],['דּוֹאֶגֶת וּלְחוּצָה','דואגת ולחוצה'],['שְׂמֵחָה מְאוֹד','שמחה מאוד'],['עֲיֵפָה','עייפה']],
+      [['לָמָּה ג׳נגר לָקַח אֶת הַסְּפָרִים?','למה ג׳נגר לקח את הספרים?'],['כִּי הוּא אָהַב סִפּוּרִים','כי הוא אהב סיפורים'],['כִּי הוּא רָצָה לְהַפְחִיד אֶת כֻּלָּם','כי הוא רצה להפחיד את כולם'],['כִּי הוּא רָצָה לִמְכֹּר אוֹתָם','כי הוא רצה למכור אותם']],
+      [['אֵיךְ אֵלִיָּה פָּתַר אֶת הַבְּעָיָה?','איך אליה פתר את הבעיה?'],['הוּא מַקְרִיא לג׳נגר סִפּוּר כָּל עֶרֶב','הוא מקריא לג׳נגר סיפור כל ערב'],['הוּא נָעַל אֶת הַסִּפְרִיָּה','הוא נעל את הספרייה'],['הוּא גֵּרֵשׁ אֶת ג׳נגר','הוא גירש את ג׳נגר']]]},
+ {t:['אֵלִיָּה וְאַבָּא בַּטִּיּוּל','אליה ואבא בטיול'],
+  x:['אֵלִיָּה וְאַבָּא יָצְאוּ לְטִיּוּל בָּהָר. הֵם לָקְחוּ בַּקְבּוּקֵי מַיִם, כּוֹבָעִים וְכָרִיכִים. בְּאֶמְצַע הַדֶּרֶךְ שָׁמְעוּ רַעַשׁ מוּזָר מִבֵּין הַסְּלָעִים. אֵלִיָּה הֵצִיץ וְרָאָה אוניקס עֲנָק שֶׁנִּתְקַע בֵּין שְׁתֵּי אֲבָנִים. אַבָּא וְאֵלִיָּה הֵזִיזוּ יַחַד אֶת הָאֶבֶן הַקְּטַנָּה יוֹתֵר, ואוניקס הִשְׁתַּחְרֵר. לִפְנֵי שֶׁהוּא זָחַל לְתוֹךְ הָאֲדָמָה, הוּא הִשְׁאִיר לְאֵלִיָּה אֶבֶן נוֹצֶצֶת בְּמַתָּנָה.',
+     'אליה ואבא יצאו לטיול בהר. הם לקחו בקבוקי מים, כובעים וכריכים. באמצע הדרך שמעו רעש מוזר מבין הסלעים. אליה הציץ וראה אוניקס ענק שנתקע בין שתי אבנים. אבא ואליה הזיזו יחד את האבן הקטנה יותר, ואוניקס השתחרר. לפני שהוא זחל לתוך האדמה, הוא השאיר לאליה אבן נוצצת במתנה.'],
+  qs:[[['עִם מִי אֵלִיָּה יָצָא לְטִיּוּל?','עם מי אליה יצא לטיול?'],['עִם אַבָּא','עם אבא'],['עִם סַבָּא','עם סבא'],['עִם הַכִּתָּה','עם הכיתה']],
+      [['מָה הֵם לֹא לָקְחוּ לַטִּיּוּל?','מה הם לא לקחו לטיול?'],['פָּנָס','פנס'],['כּוֹבָעִים','כובעים'],['כָּרִיכִים','כריכים']],
+      [['מָה קָרָה לאוניקס?','מה קרה לאוניקס?'],['הוּא נִתְקַע בֵּין שְׁתֵּי אֲבָנִים','הוא נתקע בין שתי אבנים'],['הוּא נָפַל לַנָּהָר','הוא נפל לנהר'],['הוּא אִבֵּד אֶת הַדֶּרֶךְ','הוא איבד את הדרך']],
+      [['לָמָּה, לְדַעְתְּךָ, אוניקס הִשְׁאִיר לְאֵלִיָּה מַתָּנָה?','למה, לדעתך, אוניקס השאיר לאליה מתנה?'],['כְּדֵי לְהַגִּיד תּוֹדָה','כדי להגיד תודה'],['כִּי הָאֶבֶן הָיְתָה כְּבֵדָה לוֹ','כי האבן הייתה כבדה לו'],['כִּי הוּא כָּעַס עָלָיו','כי הוא כעס עליו']]]}
+];
+/* collection: names as text only, with a type sign */
+var DEX=[['פיקאצ׳ו','⚡'],['בולבזאור','🌿'],['צ׳רמנדר','🔥'],['סקווירטל','💧'],['איווי','⭐'],['ג׳יגליפאף','🎵'],['סנורלקס','😴'],['ג׳נגר','👻'],['אוניקס','🪨'],['מגיקארפ','🐟'],['לאפרס','🌊'],['דרגונייט','🐉'],['מיוטו','🔮'],['ראיצ׳ו','⚡'],['מיו','✨']];
+var PRAISE=['כָּל הַכָּבוֹד, אֵלִיָּה!','אַלּוּף, אֵלִיָּה!','יוֹפִי!','מְצֻיָּן, אֵלִיָּה!','בּוּל!','אֵלִיָּה, אַתָּה תּוֹתָח!','מַכָּה חַשְׁמַלִּית! ⚡'];
+var MODES={
+  tower:{c:'orange',title:'מִגְדַּל קְרִיאָה',n:3,glyph:'🏔️',desc:'משפט שגדל מילה אחרי מילה, ואז על זמן'},
+  flash:{c:'teal',title:'מִלָּה בִּמְהִירוּת הַבָּרָק',n:10,glyph:'⚡',desc:'המילה מופיעה ונעלמת. זוכר אותה?'},
+  cloze:{c:'purple',title:'הַשְׁלֵם אֶת הַמִּשְׁפָּט',n:8,glyph:'🧩',desc:'איזו מילה חסרה במשפט?'},
+  story:{c:'green',title:'הַהַרְפַּתְקָאוֹת שֶׁל אֵלִיָּה',n:4,glyph:'📖',desc:'סיפור קצר ושאלות עליו'},
+  plain:{c:'blue',title:'קְרִיאָה בְּלִי נִקּוּד',n:10,glyph:'א?',desc:'קוראים מילה בלי ניקוד ובוחרים תמונה'}
+};
+
+/* ---------- helpers ---------- */
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var x=a[i];a[i]=a[j];a[j]=x;}return a;}
+function pick(a){return a[Math.floor(Math.random()*a.length)];}
+function load(k,d){try{var v=localStorage.getItem('eliya-'+k);return v===null?d:JSON.parse(v);}catch(e){return d;}}
+function save(k,v){try{localStorage.setItem('eliya-'+k,JSON.stringify(v));}catch(e){}}
+function T(p){return S.nq?p[0]:p[1];}
+
+var S={screen:'home',mode:null,q:0,round:[],cur:null,first:true,stars:0,lock:false,tok:0,
+  total:load('total',0),sound:load('sound',true),flash:load('flash',2000),nq:load('nq',true),
+  stats:load('stats',{}),best:load('best',{}),dex:load('dex',[]),caught:null};
+/* ---------- icons ---------- */
+var STAR='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" fill="var(--star)" stroke="var(--star-edge)" stroke-width="1.2" stroke-linejoin="round"/></svg>';
+var STAR_EMPTY='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" fill="none" stroke="var(--line)" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+var HOME='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v10h13V10"/><path d="M10 20v-5h4v5"/></svg>';
+var SPK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L13 19V5L7.5 9.5z"/><path d="M16.5 9a4.5 4.5 0 0 1 0 6"/><path d="M19 6.5a8 8 0 0 1 0 11"/></svg>';
+var MUTE='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.5L13 19V5L7.5 9.5z"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5"/></svg>';
+
+/* ---------- sound ---------- */
+var actx=null;
+function tone(seq){
+  if(!S.sound)return;
+  try{
+    actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+    var t0=actx.currentTime;
+    seq.forEach(function(n){
+      var o=actx.createOscillator(),g=actx.createGain();
+      o.type='triangle';o.frequency.value=n[0];
+      g.gain.setValueAtTime(0.0001,t0+n[1]);
+      g.gain.exponentialRampToValueAtTime(0.22,t0+n[1]+0.02);
+      g.gain.exponentialRampToValueAtTime(0.0001,t0+n[1]+n[2]);
+      o.connect(g);g.connect(actx.destination);
+      o.start(t0+n[1]);o.stop(t0+n[1]+n[2]+0.05);
+    });
+  }catch(e){}
+}
+var GOOD=[[660,0,.14],[990,.11,.28]],BAD=[[260,0,.18],[200,.14,.24]],WIN=[[523,0,.16],[659,.14,.16],[784,.28,.16],[1046,.42,.45]];
+var heVoice=null,voicesKnown=false;
+function loadVoices(){
+  try{
+    var vs=window.speechSynthesis.getVoices();
+    if(vs&&vs.length){
+      var had=voicesKnown;voicesKnown=true;
+      heVoice=vs.filter(function(v){return /^(he|iw)/i.test(v.lang);})[0]||null;
+      if(S.screen==='home'&&!had)render();
+    }
+  }catch(e){}
+}
+if('speechSynthesis' in window){loadVoices();try{window.speechSynthesis.onvoiceschanged=loadVoices;}catch(e){}}
+function speak(text,rate){
+  if(!S.sound||!('speechSynthesis' in window))return;
+  try{
+    window.speechSynthesis.cancel();
+    var u=new SpeechSynthesisUtterance(text);
+    u.lang='he-IL';u.rate=rate||0.8;if(heVoice)u.voice=heVoice;
+    window.speechSynthesis.speak(u);
+  }catch(e){}
+}
+function hush(){try{window.speechSynthesis&&window.speechSynthesis.cancel();}catch(e){}}
+
+/* ---------- game logic ---------- */
+function stat(firstTry){
+  var s=S.stats[S.mode]||[0,0];s[0]++;if(firstTry)s[1]++;S.stats[S.mode]=s;save('stats',S.stats);
+}
+function startMode(m){
+  S.mode=m;S.q=0;S.stars=0;S.tok++;S.caught=null;
+  var n=MODES[m].n,r=[],p;
+  if(m==='story'){
+    var last=load('lastStory',-1),idx;
+    do{idx=Math.floor(Math.random()*STORIES.length);}while(STORIES.length>1&&idx===last);
+    save('lastStory',idx);
+    r=STORIES[idx].qs.map(function(q){return {st:STORIES[idx],q:q};});
+  }else{
+    if(m==='tower')p=TOWER.map(function(s,i){return {s:s,i:i};});
+    else if(m==='flash'){p=[];GROUPS.forEach(function(g){g.forEach(function(w,i){p.push({g:g,i:i});});});}
+    else if(m==='cloze')p=CLOZE;
+    else p=PLAIN;
+    r=shuffle(p).slice(0,n);
+  }
+  S.round=r;makeQ();S.screen='game';render();afterRender();
+  try{if(location.hash!=='#play')location.hash='play';}catch(e){}
+}
+function makeQ(){
+  var m=S.mode,x=S.round[S.q],c;
+  if(m==='flash'){c={w:x.g[x.i],ans:x.g[x.i],phase:'show',opts:shuffle(x.g)};}
+  else if(m==='cloze'){c={s:x.s,ans:x.a,opts:shuffle([x.a].concat(x.w))};}
+  else if(m==='plain'){c={w:x,ans:x,hint:false,opts:shuffle([x].concat(shuffle(PLAIN.filter(function(o){return o!==x;})).slice(0,3)))};}
+  else if(m==='story'){c={st:x.st,q:x.q[0],ans:x.q[1],opts:shuffle(x.q.slice(1))};}
+  else if(m==='tower'){c={s:x.s,i:x.i,line:1,phase:'build',t0:0,time:0,rec:false};}
+  S.cur=c;S.first=true;S.lock=false;
+}
+function afterRender(){
+  if(S.screen==='game'&&S.mode==='flash'&&S.cur.phase==='show'){
+    var tok=++S.tok;
+    setTimeout(function(){
+      if(tok!==S.tok||S.screen!=='game'||S.mode!=='flash')return;
+      S.cur.phase='pick';render();
+    },S.flash);
+  }
+}
+function words(){return T(S.cur.s).split(' ');}
+function sayPrompt(){
+  var c=S.cur,m=S.mode;
+  if(m==='cloze')speak(c.s[0].replace('___','...'));
+  else if(m==='story')speak(c.st.x[0],0.85);
+  else if(m==='tower')speak(c.s[0].split(' ').slice(0,c.line).join(' '));
+}
+function answer(i,btn){
+  if(S.lock)return;
+  var c=S.cur,fb=document.getElementById('fb');
+  if(c.opts[i]===c.ans){
+    S.lock=true;btn.classList.add('ok');
+    if(S.first){S.stars++;S.total++;save('total',S.total);}
+    stat(S.first);
+    var pill=document.querySelector('.bar .pill b');if(pill)pill.textContent=S.stars;
+    tone(GOOD);fb.className='fb heb';fb.textContent=pick(PRAISE);
+    if(S.mode==='cloze'){var bl=document.querySelector('.blank');if(bl)bl.textContent=T(c.ans);speak(c.s[0].replace('___',c.ans[0]));}
+    else if(S.mode==='flash')speak(c.w[0]);
+    else if(S.mode==='plain'){var pw=document.querySelector('.pointed');if(!pw)document.querySelector('.prompt').insertAdjacentHTML('beforeend','<div class="pointed heb">'+c.w[1]+'</div>');speak(c.w[1]);}
+    setTimeout(next,1700);
+  }else{
+    S.first=false;btn.classList.add('no');btn.disabled=true;
+    tone(BAD);fb.className='fb heb try';
+    fb.textContent=S.mode==='story'?'נַסֵּה שׁוּב, אֵלִיָּה. הַתְּשׁוּבָה מְחַכָּה לְךָ בַּסִּפּוּר':'נַסֵּה שׁוּב, אֵלִיָּה';
+  }
+}
+function next(){
+  S.q++;
+  if(S.q>=S.round.length){finish();return;}
+  makeQ();render();afterRender();window.scrollTo(0,0);
+}
+function finish(){
+  S.tok++;
+  var n=S.round.length;
+  if(S.stars>=Math.ceil(n*0.6)){
+    var left=DEX.filter(function(d){return S.dex.indexOf(d[0])<0;});
+    if(left.length){var d=pick(left);S.dex.push(d[0]);save('dex',S.dex);S.caught=d;}
+    else S.caught='all';
+  }else S.caught=null;
+  S.screen='end';render();tone(WIN);
+}
+/* tower steps */
+function towerStep(){
+  var c=S.cur,n=words().length;
+  if(c.phase==='build'){
+    if(c.line<n){c.line++;tone([[880,0,.09]]);render();}
+    else{c.phase='ready';render();}
+  }else if(c.phase==='ready'){
+    c.phase='timing';c.t0=Date.now();render();tickTimer();
+  }else if(c.phase==='timing'){
+    c.time=(Date.now()-c.t0)/1000;c.phase='done';
+    var key=c.i+(S.nq?'n':'p'),b=S.best[key];
+    c.rec=false;
+    if(c.time>=0.8&&(!b||c.time<b)){c.rec=!!b;S.best[key]=Math.round(c.time*10)/10;save('best',S.best);}
+    S.stars++;S.total++;save('total',S.total);stat(true);
+    tone(c.rec?WIN:GOOD);render();
+  }else{next();}
+}
+function tickTimer(){
+  var tok=++S.tok;
+  (function loop(){
+    if(tok!==S.tok||S.screen!=='game'||S.mode!=='tower'||S.cur.phase!=='timing')return;
+    var el=document.getElementById('timer');
+    if(el)el.textContent=((Date.now()-S.cur.t0)/1000).toFixed(1);
+    setTimeout(loop,100);
+  })();
+}
+
+/* ---------- exit confirm ---------- */
+function showConfirm(){
+  if(document.getElementById('exitModal'))return;
+  $app.insertAdjacentHTML('beforeend','<div class="modal" id="exitModal" role="dialog" aria-modal="true" aria-labelledby="exitTitle"><div class="sheet"><div class="face" aria-hidden="true">🤔</div><h2 class="heb" id="exitTitle">אֵלִיָּה, לָצֵאת מֵהַמִּשְׂחָק?</h2><p class="heb">הַסִּבּוּב יַתְחִיל מֵהַהַתְחָלָה</p><button class="btn go heb" data-act="stay">מַמְשִׁיכִים לְשַׂחֵק</button><button class="btn heb" data-act="leave">יוֹצְאִים</button></div></div>');
+}
+function hideConfirm(){var m=document.getElementById('exitModal');if(m)m.remove();}
+function leaveGame(){
+  hideConfirm();hush();S.tok++;go('home');
+  try{if(location.hash==='#play')history.back();}catch(e){}
+}
+window.addEventListener('hashchange',function(){
+  if(location.hash!=='#play'&&S.screen==='game'){showConfirm();try{location.hash='play';}catch(e){}}
+});
+
+/* ---------- screens ---------- */
+function nqBtn(full){
+  return '<button class="nq heb" data-act="nq" aria-pressed="'+S.nq+'" aria-label="ניקוד '+(S.nq?'מופעל':'כבוי')+'"><b>'+(S.nq?'אָ':'א')+'</b>'+(full?(S.nq?'עִם נִקּוּד':'בְּלִי נִקּוּד'):'')+'</button>';
+}
+function tile(m,wide){
+  var d=MODES[m];
+  return '<button class="tile t-'+d.c+(wide?' wide':'')+'" data-act="mode" data-mode="'+m+'"><span class="glyph heb">'+d.glyph+'</span><span><span class="tt heb" style="display:block">'+d.title+'</span><span class="td">'+d.desc+'</span></span></button>';
+}
+function renderHome(){
+  var note='';
+  if(!('speechSynthesis' in window))note='המכשיר הזה לא יכול להקריא בקול. אפשר לשחק גם בלי.';
+  else if(voicesKnown&&!heVoice)note='אין במכשיר קול בעברית, ולכן כפתור הרמקול לא יקריא. ההוראות לתיקון נמצאות בכפתור "למבוגרים".';
+  return '<header class="hello"><div><h1 class="heb">שָׁלוֹם אֵלִיָּה! ⚡</h1><p class="heb">מוּכָן לְהַרְפַּתְקַת קְרִיאָה, מְאַמֵּן?</p></div>'+
+    '<div class="pill" aria-label="'+S.total+' כוכבים">'+STAR+'<b>'+S.total+'</b></div></header>'+
+    '<p class="sec heb">⚡ קְרִיאָה שׁוֹטֶפֶת</p><div class="tiles">'+tile('tower')+tile('flash')+'</div>'+
+    '<p class="sec heb">💡 הֲבָנַת הַנִּקְרָא</p><div class="tiles">'+tile('cloze')+tile('story')+'</div>'+
+    '<p class="sec heb">🔤 בְּלִי עֶזְרָה</p><div class="tiles">'+tile('plain',true)+
+    '<button class="tile wide t-pink" data-act="dex"><span class="glyph">🏆</span><span><span class="tt heb" style="display:block">הָאֹסֶף שֶׁל אֵלִיָּה</span><span class="td">'+S.dex.length+' מתוך '+DEX.length+' נתפסו. כל סיבוב טוב = פוקימון חדש!</span></span></button></div>'+
+    (note?'<p class="note">'+note+'</p>':'')+
+    '<div class="foot">'+nqBtn(true)+'<button class="ghost" data-act="settings">למבוגרים</button>'+
+    '<button class="round" data-act="sound" aria-pressed="'+S.sound+'" aria-label="'+(S.sound?'השתקה':'הפעלת צליל')+'">'+(S.sound?SPK:MUTE)+'</button></div>';
+}
+function optBtns(cls){
+  return S.cur.opts.map(function(o,i){return '<button class="opt '+cls+' heb" data-act="ans" data-i="'+i+'">'+T(o)+'</button>';}).join('');
+}
+function renderGame(){
+  var c=S.cur,m=MODES[S.mode],prompt='',q='',opts='',cols='c1',tip='',say=true,extra='';
+  if(S.mode==='flash'){
+    say=false;
+    if(c.phase==='show'){
+      prompt='<div class="flashword heb">'+T(c.w)+'</div>';
+      q='הִסְתַּכֵּל טוֹב, אֵלִיָּה...';opts='<div class="wait heb">👀</div>';
+    }else{
+      prompt='<div class="hidden-q" aria-hidden="true">?</div><button class="again heb" data-act="reshow">לְהַרְאוֹת שׁוּב</button>';
+      q='אֵיזוֹ מִלָּה רָאִיתָ?';cols='c2';opts=optBtns('wordmid');
+    }
+  }else if(S.mode==='cloze'){
+    prompt='<p class="sentence heb">'+T(c.s).replace(/___([.,!?]?)/,'<span style="white-space:nowrap"><span class="blank" style="display:inline-block;min-width:2.4em;border-bottom:4px solid var(--c);color:var(--c)">?</span>$1</span>')+'</p>';
+    q='אֵיזוֹ מִלָּה חֲסֵרָה?';cols='c3';opts=optBtns('wordmid');
+  }else if(S.mode==='plain'){
+    say=false;
+    prompt='<div class="plainword heb">'+c.w[0]+'</div>'+(c.hint?'<div class="pointed heb">'+c.w[1]+'</div>':'<button class="hint heb" data-act="hint">💡 רֶמֶז: לְהַרְאוֹת נִקּוּד</button>');
+    q='מָה כָּתוּב כָּאן? בְּחַר תְּמוּנָה';cols='c2';
+    opts=c.opts.map(function(o,i){return '<button class="opt emo" data-act="ans" data-i="'+i+'" aria-label="תמונה '+(i+1)+'"><span aria-hidden="true">'+o[2]+'</span></button>';}).join('');
+    tip='<p class="tip heb">קְרָא בְּשֶׁקֶט וְנַחֵשׁ לְפִי הָאוֹתִיּוֹת. רֶמֶז עוֹלֶה כּוֹכָב.</p>';
+  }else if(S.mode==='story'){
+    prompt='<h2 class="story-t heb">'+T(c.st.t)+'</h2><p class="story heb">'+T(c.st.x)+'</p>';
+    extra='<p class="qn heb">שְׁאֵלָה '+(S.q+1)+' מִתּוֹךְ '+S.round.length+'</p><p class="sq heb t-green">'+T(c.q)+'</p>';
+    opts=optBtns('txt');
+  }else if(S.mode==='tower'){
+    var w=words();
+    if(c.phase==='build'||c.phase==='ready'){
+      var lines='';
+      for(var i=1;i<=c.line;i++)lines+='<p class="tline heb'+(i===c.line?' now':'')+'">'+w.slice(0,i).join(' ')+'</p>';
+      prompt='<div class="tower">'+lines+'</div>';
+      if(c.phase==='build'){
+        q=c.line===1?'אֵלִיָּה, קְרָא בְּקוֹל אֶת הַשּׁוּרָה':'עוֹד מִלָּה! קְרָא שׁוּב אֶת כָּל הַשּׁוּרָה';
+        opts='<div class="row"><button class="btn go heb" data-act="tw">קָרָאתִי! ✓</button></div>';
+      }else{
+        q='עַכְשָׁו קְרָא אֶת כָּל הַמִּשְׁפָּט בִּמְהִירוּת הַבָּרָק, אֵלִיָּה! ⚡';
+        opts='<div class="row"><button class="btn primary heb" data-act="tw">⏱ מַתְחִילִים</button></div>';
+      }
+    }else if(c.phase==='timing'){
+      say=false;prompt='<p class="sentence heb">'+w.join(' ')+'</p><div class="timer" id="timer">0.0</div>';
+      opts='<div class="row"><button class="btn go heb" data-act="tw">סִיַּמְתִּי!</button></div>';
+    }else{
+      say=false;var b=S.best[c.i+(S.nq?'n':'p')];
+      prompt='<p class="sentence heb">'+w.join(' ')+'</p><div class="timer">'+c.time.toFixed(1)+'</div>';
+      extra='<p class="big-msg heb'+(c.rec?' record':'')+'">'+(c.rec?'🏆 שִׂיא חָדָשׁ, אֵלִיָּה! 🏆':pick(PRAISE))+'</p>'+
+        (b&&!c.rec?'<p class="tip heb">הַשִּׂיא שֶׁלְּךָ בַּמִּשְׁפָּט הַזֶּה: '+b+' שְׁנִיּוֹת</p>':'');
+      opts='<div class="row"><button class="btn primary heb" data-act="tw">מַמְשִׁיכִים ←</button></div>';
+    }
+  }
+  var dots='';for(var d=0;d<S.round.length;d++)dots+='<span class="dot'+(d<S.q?' done':d===S.q?' now':'')+'"></span>';
+  return '<div class="bar t-'+m.c+'"><button class="round" data-act="home" aria-label="לדף הבית">'+HOME+'</button>'+
+    (S.mode==='plain'||(S.mode==='tower'&&c.phase==='timing')?'':nqBtn(false))+
+    '<div class="dots" aria-label="שאלה '+(S.q+1)+' מתוך '+S.round.length+'">'+dots+'</div>'+
+    '<div class="pill" aria-label="כוכבים בסיבוב">'+STAR+'<b>'+S.stars+'</b></div></div>'+
+    '<section class="prompt t-'+m.c+'">'+prompt+(say?'<button class="round say" data-act="say" aria-label="להקשיב">'+SPK+'</button>':'')+'</section>'+
+    extra+(q?'<h2 class="q heb">'+q+'</h2>':'')+
+    '<div class="opts '+cols+'">'+opts+'</div>'+tip+
+    '<p class="fb heb" id="fb" aria-live="polite"></p>';
+}
+function renderEnd(){
+  var colors=['var(--purple)','var(--star)','var(--orange)','var(--teal)','var(--pink)'],conf='';
+  for(var i=0;i<40;i++)conf+='<span style="left:'+(Math.random()*100).toFixed(1)+'%;background:'+pick(colors)+';animation-duration:'+(2.2+Math.random()*1.6).toFixed(2)+'s;animation-delay:'+(Math.random()*.8).toFixed(2)+'s"></span>';
+  var n=S.round.length,st='';for(var j=0;j<n;j++)st+=j<S.stars?STAR:STAR_EMPTY;
+  var ct='';
+  if(S.caught==='all')ct='<div class="catch"><div class="ce">🏆</div><div class="cn heb">אֵלִיָּה, תָּפַסְתָּ אֶת כֻּלָּם!</div><div class="ct heb">אַתָּה מְאַמֵּן אַלּוּף</div></div>';
+  else if(S.caught)ct='<div class="catch"><div class="ce">'+S.caught[1]+'</div><div class="cn heb">תָּפַסְתָּ אֶת '+S.caught[0]+'!</div><div class="ct heb">הוּא נִכְנַס לָאֹסֶף שֶׁל אֵלִיָּה</div></div>';
+  else ct='<p class="tip heb">עוֹד קְצָת! בַּסִּבּוּב הַבָּא, עִם עוֹד כּוֹכָבִים, תִּתְפֹּס פּוֹקִימוֹן חָדָשׁ</p>';
+  return '<div class="confetti" aria-hidden="true">'+conf+'</div>'+
+    '<section class="end"><h1 class="heb">כָּל הַכָּבוֹד, מְאַמֵּן אֵלִיָּה! ⚡</h1>'+
+    '<div class="stars" aria-label="'+S.stars+' כוכבים מתוך '+n+'">'+st+'</div>'+
+    '<p class="score heb">'+S.stars+' כּוֹכָבִים מִתּוֹךְ '+n+'</p>'+ct+
+    '<div class="row"><button class="btn primary heb" data-act="again">עוֹד פַּעַם</button><button class="btn heb" data-act="home">הַבַּיְתָה</button></div></section>';
+}
+function renderDex(){
+  var cards=DEX.map(function(d){
+    var has=S.dex.indexOf(d[0])>-1;
+    return '<div class="card'+(has?'':' no')+'"><span class="ce">'+(has?d[1]:'❔')+'</span><span class="cn heb">'+(has?d[0]:'???')+'</span></div>';
+  }).join('');
+  return '<div class="bar"><button class="round" data-act="home" aria-label="לדף הבית">'+HOME+'</button><h2 class="bt heb">הָאֹסֶף שֶׁל אֵלִיָּה</h2><span style="width:52px"></span></div>'+
+    '<p class="q heb">'+S.dex.length+' מִתּוֹךְ '+DEX.length+'</p>'+
+    '<div class="coll">'+cards+'</div>'+
+    '<p class="tip heb">מְסַיְּמִים סִבּוּב עִם הַרְבֵּה כּוֹכָבִים וְתוֹפְסִים פּוֹקִימוֹן חָדָשׁ!</p>';
+}
+function renderSettings(){
+  var rows=Object.keys(MODES).map(function(k){
+    var s=S.stats[k]||[0,0],pct=s[0]?Math.round(100*s[1]/s[0]):0;
+    var txt=k==='tower'?(s[0]+' משפטים'):(s[0]?pct+'% בניסיון ראשון · '+s[0]+' שאלות':'עוד לא שיחק');
+    return '<tr><td>'+MODES[k].title.replace(/[֑-ׇ]/g,'')+(k!=='tower'&&s[0]?'<div class="meter"><i style="width:'+pct+'%"></i></div>':'')+'</td><td>'+txt+'</td></tr>';
+  }).join('');
+  var fs=[[1200,'מהיר'],[2000,'רגיל'],[3500,'איטי']].map(function(o){return '<button data-act="fspeed" data-v="'+o[0]+'" aria-pressed="'+(S.flash===o[0])+'">'+o[1]+'</button>';}).join('');
+  return '<div class="bar"><button class="round" data-act="home" aria-label="לדף הבית">'+HOME+'</button><h2 class="bt">למבוגרים</h2><span style="width:52px"></span></div>'+
+    '<section class="panel"><h3>ההתקדמות של אליה</h3><table class="prog">'+rows+'</table>'+
+    '<p>"בניסיון ראשון" = כמה פעמים ענה נכון בלי לטעות קודם. מעל 80% זה סימן שאפשר להקשות, למשל לכבות את הניקוד.</p></section>'+
+    '<section class="panel"><h3>ניקוד</h3><p>הכפתור <b>אָ / א</b> מדליק ומכבה ניקוד בכל המשחקים, וגם באמצע משחק. כדאי להתחיל עם ניקוד, ולכבות אותו כשהקריאה נעשית קלה. השיאים במגדל הקריאה נשמרים בנפרד לכל מצב.</p><div class="row">'+nqBtn(true)+'</div></section>'+
+    '<section class="panel"><h3>מהירות "מילה במהירות הברק"</h3><p>כמה זמן המילה מוצגת לפני שהיא נעלמת.</p><div class="seg">'+fs+'</div></section>'+
+    '<section class="panel"><h3>טיפים לעבודה איתו</h3>'+
+    '<p><b>מגדל קריאה</b> הוא תרגיל שטף: קוראים בקול מילה אחרי מילה, ובסוף את כל המשפט על זמן. המטרה היא לשפר את השיא של עצמו, לא למהר.</p>'+
+    '<p><b>ההרפתקאות של אליה</b>: כדאי לבקש ממנו לקרוא את הסיפור בקול לפני השאלות. חלק מהשאלות דורשות לחשוב, לא רק למצוא את התשובה בטקסט.</p>'+
+    '<p>האוסף נותן מוטיבציה: פוקימון חדש מתקבל רק בסיבוב עם לפחות 60% כוכבים.</p></section>'+
+    '<section class="panel"><h3>אין קול בעברית? כך מסדרים</h3>'+
+    '<p><b>באייפד / אייפון:</b></p><ol class="steps"><li><b>הגדרות</b> ← <b>נגישות</b> ← <b>תוכן מוקרא</b> ← <b>קולות</b>.</li><li>בוחרים <b>עברית</b> ומורידים קול.</li><li>סוגרים את האפליקציה ופותחים מחדש.</li></ol>'+
+    '<p><b>באנדרואיד:</b></p><ol class="steps"><li><b>הגדרות</b> ← מחפשים <b>טקסט לדיבור</b>.</li><li>מנוע <b>Google</b> ← גלגל השיניים ← <b>התקנת נתוני קול</b> ← <b>עברית</b>.</li><li>פותחים את המשחק מחדש.</li></ol>'+
+    '<div class="row"><button class="small" data-act="test">בדיקת קול</button></div></section>'+
+    '<section class="panel"><h3>איפוס</h3><p>מחיקת הכוכבים, ההתקדמות, השיאים והאוסף במכשיר הזה.</p><div class="row"><button class="small" data-act="reset">איפוס נתונים</button></div></section>';
+}
+var $app=document.getElementById('app');
+function render(){
+  $app.innerHTML={home:renderHome,game:renderGame,end:renderEnd,settings:renderSettings,dex:renderDex}[S.screen]();
+}
+function go(screen){S.screen=screen;render();window.scrollTo(0,0);}
+
+$app.addEventListener('click',function(e){
+  var b=e.target.closest('[data-act]');if(!b)return;
+  var a=b.dataset.act,modal=document.getElementById('exitModal');
+  if(modal&&a!=='stay'&&a!=='leave')return;
+  if(a==='mode'){startMode(b.dataset.mode);window.scrollTo(0,0);}
+  else if(a==='home'){
+    if(S.screen==='game')showConfirm();
+    else if(S.screen==='end')leaveGame();
+    else{hush();go('home');}
+  }
+  else if(a==='stay')hideConfirm();
+  else if(a==='leave')leaveGame();
+  else if(a==='ans')answer(+b.dataset.i,b);
+  else if(a==='tw')towerStep();
+  else if(a==='reshow'){S.cur.phase='show';render();afterRender();}
+  else if(a==='hint'){S.cur.hint=true;S.first=false;render();}
+  else if(a==='say')sayPrompt();
+  else if(a==='nq'){S.nq=!S.nq;save('nq',S.nq);render();}
+  else if(a==='dex')go('dex');
+  else if(a==='again'){startMode(S.mode);window.scrollTo(0,0);}
+  else if(a==='sound'){S.sound=!S.sound;save('sound',S.sound);render();if(S.sound)tone(GOOD);}
+  else if(a==='settings')go('settings');
+  else if(a==='fspeed'){S.flash=+b.dataset.v;save('flash',S.flash);render();}
+  else if(a==='test')speak('שָׁלוֹם אֵלִיָּה, בּוֹא נִקְרָא סִפּוּר');
+  else if(a==='reset'){
+    if(window.confirm('למחוק את כל ההתקדמות והאוסף של אליה במכשיר הזה?')){
+      S.total=0;S.stats={};S.best={};S.dex=[];save('total',0);save('stats',{});save('best',{});save('dex',[]);render();
+    }
+  }
+});
+render();
+})();
+</script>
+<script>
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
+</script>
+</body></html>
